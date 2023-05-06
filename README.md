@@ -1,3 +1,9 @@
+
+# Weather React App Design
+
+Hi, This is Meeta and I am a student at NYIT. This is a weather react app we created in the Web Development class.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
