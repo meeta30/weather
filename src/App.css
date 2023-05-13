@@ -1,3 +1,32 @@
+body {
+  background-image: url(../public/sun-g49ff9885c_1280.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  color: aliceblue;
+}
+
+.card-title.h5 {
+  color: azure;
+}
+
+.card-body {
+  background-color: black;
+}
+
+.card-text {
+  color: azure;
+
+}
+.card-background {
+  background-color:rgb(31, 47, 69);
+}
+
+
+
+
 .App {
   text-align: center;
 }

@@ -1,24 +1,70 @@
-import'./App.css';
-import Heading from './components/Heading';
-import Body from './components/Body';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React, { useState } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import './App.css';
+import CityInput from './components/CityInput';
+import CurrentWeather from './components/CurrentWeather.js';
+import Forecast from './components/Forecast';
 
+const API_KEY = '9f3d8ebe02d5f40c9993595852262bac';
 
+const WeatherApp = () => {
+  const [city, setCity] = useState('');
+  const [weatherData, setWeatherData] = useState(null);
+  const [forecastData, setForecastData] = useState([]);
 
-function App() {
+  const fetchWeather = async () => {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`
+      );
+      const data = await response.json();
+      setWeatherData(data);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
+
+  const fetchForecast = async () => {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=imperial`
+      );
+      const data = await response.json();
+      const formattedData = data.list.map((item) => ({
+        date: item.dt_txt,
+        temperature: item.main.temp,
+        description: item.weather[0].description,
+      }));
+      setForecastData(formattedData);
+    } catch (error) {
+      console.error('Error fetching forecast data:', error);
+    }
+  };
+
+  const handleCitySubmit = (city) => {
+    setCity(city);
+    fetchWeather();
+    fetchForecast();
+  };
+
   return (
     <Container>
-      <Row>
-        <Col>
-        <Heading />
-        <Body />
-        
+      <Row className="justify-content-center mt-5">
+        <Col md={6}>
+          <h1 className="text-center">Weather App</h1>
+          <CityInput onCitySubmit={handleCitySubmit} />
+          {weatherData && weatherData.main && (
+            <CurrentWeather
+              city={weatherData.name}
+              temperature={weatherData.main.temp}
+              description={weatherData.weather[0].description}
+            />
+          )}
+          {forecastData.length > 0 && <Forecast forecastData={forecastData} />}
         </Col>
       </Row>
     </Container>
   );
-}
+};
 
-export default App;
+export default WeatherApp;
