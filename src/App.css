@@ -9,19 +9,23 @@ h1 {
 }
 
 .card-title.h5 {
-  color: azure;
+  color: rgb(0, 0, 0);
+  font-family: 'Times New Roman', Times, serif;
+  text-align: center;
 }
 
 .card-body {
-  background-color: black;
+  background-color:#d69453;
 }
 
 .card-text {
-  color: azure;
+  color: rgb(0, 0, 0);
+  font-family:'Times New Roman', Times, serif;
+  text-align: center;
 
 }
 .card-background {
-  background-color:rgb(31, 47, 69);
+  background-color:rgb(215, 171, 96);
 }
 
 
